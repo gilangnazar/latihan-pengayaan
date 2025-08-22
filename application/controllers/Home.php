@@ -84,4 +84,39 @@ class Home extends CI_Controller
 		$this->RekamMedis_Model->delete($no_transaksi);
 		redirect('home/datarekammedis', 'refresh');
 	}
+
+	// editdata
+	public function edit($no_transaksi)
+	{
+		$peserta = $this->Peserta_Model->get();
+		$bidan = $this->Bidan_Model->get();
+		$data = $this->RekamMedis_Model->get_by_notransaksi($no_transaksi);
+
+		$data['peserta'] = $peserta;
+		$data['bidan'] = $bidan;
+		$data['rekam_medis'] = $data;
+
+		$this->load->view('editrekammedis', $data);
+	}
+
+	public function updatedata($no_transaksi)
+	{
+		$tanggal = $this->input->post('tanggal_berobat');
+		$bulan = $this->input->post('bulan_berobat');
+		$tahun = $this->input->post('tahun_berobat');
+
+		$tanggal_berobat = $tanggal . '/' . $bulan . '/' . $tahun;
+
+		$data = [
+			'no_transaksi' => $this->input->post('no_transaksi'),
+			'kode_peserta' => $this->input->post('kode_peserta'),
+			'tgl_berobat' => $tanggal_berobat,
+			'kode_bidan' => $this->input->post('kode_bidan'),
+			'keluhan' => $this->input->post('keluhan'),
+			'biaya_admin' => $this->input->post('biaya_admin'),
+		];
+		$this->RekamMedis_Model->update($no_transaksi, $data);
+
+		redirect('home/datarekammedis', 'refresh');
+	}
 }

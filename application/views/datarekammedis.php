@@ -59,7 +59,7 @@
             <td><?= $d['nama_bidan'] ?></td>
             <td><?= $d['biaya_admin'] ?></td>
             <td>
-              <a href="#" class="btn btn-warning">Edit</a>
+              <a href="<?= base_url('home/edit/' . $d['no_transaksi']) ?>" class="btn btn-warning">Edit</a>
               <a href="<?= base_url('home/hapus/' . $d['no_transaksi']) ?>" class="btn btn-danger">Delete</a>
             </td>
           </tr>

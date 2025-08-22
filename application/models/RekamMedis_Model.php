@@ -36,6 +36,17 @@ class RekamMedis_Model extends CI_Model
         $this->db->where('no_transaksi', $no_transaksi);
         return $this->db->delete('trekammedis');
     }
+
+    public function get_by_notransaksi($no_transaksi)
+    {
+        return $this->db->get_where('trekammedis', ['no_transaksi' => $no_transaksi])->row_array();
+    }
+
+    public function update($no_transaksi, $data)
+    {
+        $this->db->where('no_transaksi', $no_transaksi);
+        return $this->db->update('trekammedis', $data);
+    }
 }
 
 /* End of file RekamMedis_Model.php */
